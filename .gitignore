@@ -1,0 +1,11 @@
+# .gitignore
+
+# Backup files
+*.bak
+*.swp
+
+# Temporary files
+*.tmp
+
+# macOS system files
+.DS_Store
