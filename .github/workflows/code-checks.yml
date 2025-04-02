@@ -29,9 +29,6 @@ jobs:
           activate-environment: Project-Korora
           environment-file: environment.yml
 
-      - name: Install pre-commit
-        run: pip install pre-commit
-
       - name: Run Pre-commit Hooks (Linting & Formatting)
         run: pre-commit run --all-files
 
