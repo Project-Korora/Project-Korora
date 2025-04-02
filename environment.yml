@@ -10,6 +10,9 @@ dependencies:
 
   # code checks
   - flake8=7.1
+  - isort=6.0.1
+  - black=24.2.0
+  - pyupgrade=3.19.1
 
   - pip:
     - pre-commit
