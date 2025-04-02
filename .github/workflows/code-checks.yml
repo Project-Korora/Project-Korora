@@ -26,6 +26,11 @@ jobs:
           activate-environment: base
           auto-update-conda: true
 
+      - name: Initialize Conda
+        run: |
+          conda init bash
+          source ~/.bashrc  # This ensures conda is available in the shell session
+
       - name: Run Pre-commit Hooks (Linting & Formatting)
         run: |
           conda activate base
