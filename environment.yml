@@ -1,0 +1,12 @@
+name: Project-Korora
+channels:
+  - conda-forge
+dependencies:
+  - python=3.10
+  - pip
+
+  # test dependencies
+  - pytest>=7.3.2
+
+  # code checks
+  - flake8=7.1

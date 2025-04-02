@@ -1,0 +1,15 @@
+# .gitignore
+
+# Backup files
+*.bak
+*.swp
+
+# Temporary files
+*.tmp
+
+# macOS system files
+.DS_Store
+
+# Python cache files
+.pytest_cache/
+__pycache__/
