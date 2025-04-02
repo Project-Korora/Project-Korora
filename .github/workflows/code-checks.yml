@@ -1,4 +1,4 @@
-name: Code Checks
+name: Project-Korora
 
 on:
   push:
@@ -27,7 +27,11 @@ jobs:
           auto-update-conda: true
 
       - name: Run Pre-commit Hooks (Linting & Formatting)
-        run: pre-commit run --all-files
+        run: |
+          conda activate base
+          pre-commit run --all-files
 
       - name: Run Tests
-        run: pytest
+        run: |
+          conda activate base
+          pytest
