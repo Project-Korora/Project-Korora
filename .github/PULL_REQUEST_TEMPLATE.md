@@ -1,1 +1,1 @@
-- [ ] All [code checks passed]().
+- [ ] All [code checks passed](./CONTRIBUTING.md).
