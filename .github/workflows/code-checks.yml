@@ -30,10 +30,10 @@ jobs:
           activate-environment: ""
           environment-file: environment.yml
 
-      - name: Initialize Conda
+      - name: Create Conda Environment
         run: |
-          echo "Initializing Conda..."
-          source /usr/share/miniconda/etc/profile.d/conda.sh
+          echo "Creating environment from environment.yml..."
+          conda env create -f environment.yml
           conda activate Project-Korora
 
       - name: Install pre-commit
