@@ -1,0 +1,33 @@
+name: Code Checks
+
+on:
+  push:
+    branches:
+      - main
+      - 2.3.x
+  pull_request:
+    branches:
+      - main
+      - 2.3.x
+
+jobs:
+  code-checks:
+    name: Lint, Format, and Test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Miniconda and create environment
+        uses: conda-incubator/setup-miniconda@v2
+        with:
+          environment-file: environment.yml
+          activate-environment: base
+          auto-update-conda: true
+
+      - name: Run Pre-commit Hooks (Linting & Formatting)
+        run: pre-commit run --all-files
+
+      - name: Run Tests
+        run: pytest
