@@ -26,26 +26,14 @@ jobs:
         uses: conda-incubator/setup-miniconda@v3
         with:
           auto-update-conda: true
-          auto-activate-base: true
-          activate-environment: ""  # Don't activate any environment yet
+          activate-environment: Project-Korora
           environment-file: environment.yml
 
-      - name: Create Conda Environment
-        run: |
-          conda env create -f environment.yml
-          conda activate Project-Korora
-
       - name: Install pre-commit
-        run: |
-          conda activate Project-Korora
-          pip install pre-commit
+        run: pip install pre-commit
 
       - name: Run Pre-commit Hooks (Linting & Formatting)
-        run: |
-          conda activate Project-Korora
-          pre-commit run --all-files
+        run: pre-commit run --all-files
 
       - name: Run Tests
-        run: |
-          conda activate Project-Korora
-          pytest
+        run: pytest
