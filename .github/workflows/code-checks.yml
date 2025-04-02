@@ -20,13 +20,20 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Set up Miniconda and create environment
+      - name: Set up Miniconda and update base environment
         uses: conda-incubator/setup-miniconda@v3
         with:
           auto-update-conda: true
           auto-activate-base: true
           activate-environment: ""
           environment-file: environment.yml
+
+      - name: Verify pre-commit installation
+        run: |
+          echo "Installed conda packages:"
+          conda list
+          echo "Pre-commit executable location:"
+          which pre-commit
 
       - name: Run Pre-commit Hooks (Linting & Formatting)
         run: pre-commit run --all-files
