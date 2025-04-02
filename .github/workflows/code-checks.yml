@@ -22,27 +22,31 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Set up Miniconda and update base environment
+      - name: Set up Miniconda
         uses: conda-incubator/setup-miniconda@v3
         with:
           auto-update-conda: true
           auto-activate-base: true
-          activate-environment: ""
+          activate-environment: ""  # Don't activate any environment yet
           environment-file: environment.yml
 
       - name: Create Conda Environment
         run: |
           echo "Creating environment from environment.yml..."
           conda env create -f environment.yml
-          conda activate Project-Korora
+          source /usr/share/miniconda/etc/profile.d/conda.sh  # Ensure Conda is available
+          conda activate Project-Korora  # Activate the environment
 
       - name: Install pre-commit
         run: |
-          conda activate Project-Korora
+          source /usr/share/miniconda/etc/profile.d/conda.sh  # Ensure Conda is available
+          conda activate Project-Korora  # Activate environment again
           pip install pre-commit
 
       - name: Verify pre-commit installation
         run: |
+          source /usr/share/miniconda/etc/profile.d/conda.sh  # Ensure Conda is available
+          conda activate Project-Korora  # Activate environment
           echo "Installed conda packages:"
           conda list
           echo "Pre-commit executable location:"
@@ -50,10 +54,12 @@ jobs:
 
       - name: Run Pre-commit Hooks (Linting & Formatting)
         run: |
-          conda activate Project-Korora
+          source /usr/share/miniconda/etc/profile.d/conda.sh  # Ensure Conda is available
+          conda activate Project-Korora  # Activate environment
           pre-commit run --all-files
 
       - name: Run Tests
         run: |
-          conda activate Project-Korora
+          source /usr/share/miniconda/etc/profile.d/conda.sh  # Ensure Conda is available
+          conda activate Project-Korora  # Activate environment
           pytest
