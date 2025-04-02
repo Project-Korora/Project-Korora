@@ -10,3 +10,6 @@ dependencies:
 
   # code checks
   - flake8=7.1
+
+  - pip:
+    - pre-commit
