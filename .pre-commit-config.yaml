@@ -15,7 +15,6 @@ repos:
     rev: 24.2.0
     hooks:
       - id: black
-        args: ["--line-length=88"]
 
   - repo: https://github.com/PyCQA/flake8
     rev: 7.0.0
@@ -26,10 +25,13 @@ repos:
     rev: v3.19.1
     hooks:
       - id: pyupgrade
-        args: [--py310-plus]
 
   - repo: https://github.com/PyCQA/isort
     rev: 6.0.1
     hooks:
       - id: isort
-        args: ["--profile", "black"]
+
+  - repo: https://github.com/editorconfig-checker/editorconfig-checker
+    rev: v3.2.1  # Use a valid version or the latest release
+    hooks:
+      - id: editorconfig-checker
