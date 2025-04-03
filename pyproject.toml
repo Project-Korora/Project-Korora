@@ -25,7 +25,15 @@ line_length = 88
 
 [tool.flake8]
 # Linter settings
+extend-ignore = "E203"
+exclude = [
+    ".git",
+    "__pycache__",
+    ".pytest_cache/"
+]
+max-complexity = 10
 max-line-length = 88
+
 
 [tool.pytest.ini_options]
 addopts = "-l"
