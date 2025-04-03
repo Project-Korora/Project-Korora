@@ -30,3 +30,9 @@ repos:
     rev: 6.0.1
     hooks:
       - id: isort
+
+  - repo: https://github.com/editorconfig-checker/editorconfig-checker
+    rev: v3.0.0
+    hooks:
+        - id: editorconfig-checker
+    files: \.(json|md|yml|yaml)$

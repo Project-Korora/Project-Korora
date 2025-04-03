@@ -34,7 +34,6 @@ exclude = [
 max-complexity = 10
 max-line-length = 88
 
-
 [tool.pytest.ini_options]
 addopts = "-l"
 testpaths = ["Project_Korora/tests"]

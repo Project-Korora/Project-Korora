@@ -1,0 +1,9 @@
+{
+  "ignore": [
+    "*.py",
+    "*.pyi",
+    "*.txt",
+    "LICENSE"
+  ]
+}
+
