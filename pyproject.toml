@@ -37,4 +37,4 @@ max-line-length = 88
 
 [tool.pytest.ini_options]
 addopts = "-l"
-norecursedirs = [".git"]
+testpaths = ["Project_Korora/tests"]
