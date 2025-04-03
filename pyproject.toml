@@ -29,12 +29,4 @@ max-line-length = 88
 
 [tool.pytest.ini_options]
 addopts = "-l"
-norecursedirs = [".git", "venv", "build", "dist"]
-filterwarnings = [
-    "error",
-    "ignore:Not importing directory",
-    "ignore:distutils is deprecated and slated for removal",
-    "ignore:numpy.ufunc size changed",
-    "ignore::DeprecationWarning:.*distutils",
-    "ignore::UserWarning:.*cpuinfo"
-]
+norecursedirs = [".git"]
