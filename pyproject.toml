@@ -23,12 +23,18 @@ target-version = ['py310']
 profile = "black"
 line_length = 88
 
-[tool.pytest.ini_options]
-# Pytest settings
-testpaths = ["tests"]
-addopts = "-ra -q"
-minversion = "7.3"
-
 [tool.flake8]
 # Linter settings
 max-line-length = 88
+
+[tool.pytest.ini_options]
+addopts = "-l"
+norecursedirs = [".git", "venv", "build", "dist"]
+filterwarnings = [
+    "error",
+    "ignore:Not importing directory",
+    "ignore:distutils is deprecated and slated for removal",
+    "ignore:numpy.ufunc size changed",
+    "ignore::DeprecationWarning:.*distutils",
+    "ignore::UserWarning:.*cpuinfo"
+]
