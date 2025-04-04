@@ -23,11 +23,8 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Set up Miniconda
-        uses: conda-incubator/setup-miniconda@v3
-        with:
-          auto-update-conda: true
-          activate-environment: Project-Korora
-          environment-file: environment.yml
+        uses: ./.github/actions/setup-miniconda
+
 
       - name: Run Pre-commit Hooks (Linting & Formatting)
         run: pre-commit run --all-files
