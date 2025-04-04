@@ -1,0 +1,22 @@
+# Python sources
+*.py    text diff=python
+
+# Documents
+*.md    text diff=markdown
+*.txt   text
+
+# Serialisation
+*.json  text
+*.toml  text
+*.yaml  text
+*.yml   text
+
+# Configuration files
+.editorconfig   text
+.gitignore      text
+LICENSE         text
+
+# Ignore top level
+.github             export-ignore
+.git                export-ignore
+environment.yml     export-ignore
