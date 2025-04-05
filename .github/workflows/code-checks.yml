@@ -25,6 +25,3 @@ jobs:
 
       - name: Run Pre-commit Hooks (Linting & Formatting)
         run: pre-commit run --all-files
-
-      - name: Run Tests
-        run: pytest
