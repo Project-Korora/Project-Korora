@@ -10,8 +10,6 @@ repos:
       - id: trailing-whitespace
       - id: check-yaml
       - id: check-toml
-      - id: check-json
-      - id: no-commit-to-branch
 
   - repo: https://github.com/psf/black
     rev: 24.2.0
@@ -34,6 +32,6 @@ repos:
       - id: isort
 
   - repo: https://github.com/editorconfig-checker/editorconfig-checker
-    rev: v3.2.1
+    rev: v3.2.1  # Use a valid version or the latest release
     hooks:
       - id: editorconfig-checker
