@@ -1,15 +1,15 @@
 name: Set up Conda Environment
-description: Sets up a Conda environment using the conda-incubator/setup-miniconda action.
+description: Sets up a Conda environment using the conda-incubator/setup-miniconda action
 inputs:
   auto-update-conda:
-    description: 'Automatically update Conda'
+    description: Automatically update Conda
     default: 'true'
   activate-environment:
-    description: 'Name of the Conda environment to activate'
-    default: 'Project-Korora'
+    description: Name of the Conda environment to activate
+    default: Project-Korora
   environment-file:
-    description: 'Path to the Conda environment file'
-    default: 'environment.yml'
+    description: Path to the Conda environment file
+    default: environment.yml
 runs:
   using: composite
   steps:

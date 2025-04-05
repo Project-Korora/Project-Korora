@@ -1,14 +1,12 @@
-name: Code Checks
-
 on:
   push:
     branches:
       - main
-      - 2.3.x
   pull_request:
     branches:
       - main
-      - 2.3.x
+
+name: Code Checks
 
 jobs:
   code-checks:
@@ -24,7 +22,6 @@ jobs:
 
       - name: Set up Miniconda
         uses: ./.github/actions/setup-miniconda
-
 
       - name: Run Pre-commit Hooks (Linting & Formatting)
         run: pre-commit run --all-files
