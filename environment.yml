@@ -14,5 +14,8 @@ dependencies:
   - black=24.2.0
   - pyupgrade=3.19.1
 
+  # documentation
+  - sphinx
+
   - pip:
     - pre-commit
