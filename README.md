@@ -14,14 +14,14 @@ This repository contains the systems code for Project Kororā, a student-led spa
 ### Local Development
 
 1. Clone the repository:
-   ```bash
-   git clone https://github.com/Project-Korora/Project-Korora.git
-   ```
+  ```bash
+  git clone https://github.com/Project-Korora/Project-Korora.git
+  ```
 
 2. Navigate to the project directory:
-   ```bash
-   cd Project-Korora/
-   ```
+  ```bash
+  cd Project-Korora/
+  ```
 
 ### Contributing
 
