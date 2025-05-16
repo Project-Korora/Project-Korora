@@ -7,7 +7,7 @@
 
 </div>
 
-The official website for Project Kororā, a student-led space initiative at Te Herenga Waka—Victoria University of Wellington, focused on developing New Zealand's space economy through CubeSat development.
+This repository contains the systems code for Project Kororā, a student-led space initiative at Te Herenga Waka—Victoria University of Wellington. The project is focused on advancing New Zealand's space economy through the development and deployment of CubeSats. Code in this repo is written for the PyCubed framework.
 
 ## Development
 
