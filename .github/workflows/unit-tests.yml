@@ -6,10 +6,7 @@ on:
     branches:
       - main
 
-permissions:
-  contents: read
-
-name: Run Tests
+name: Unit Tests
 
 jobs:
   test:
