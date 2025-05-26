@@ -1,4 +1,4 @@
-# Project Kororā Website
+# Project Kororā
 
 <div align="center">
 
