@@ -1,3 +1,6 @@
+# End of line normalization
+* text=auto eol=lf
+
 # Python sources
 *.py    text diff=python
 
