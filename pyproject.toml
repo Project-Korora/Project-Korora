@@ -31,7 +31,8 @@ exclude = [
     "__pycache__",
     ".pytest_cache/"
 ]
-max-complexity = 10
+# Max Complexity is set to 19 for the nessacarily complex Satelite.__init__() method.
+max-complexity = 19
 max-line-length = 88
 
 [tool.pytest.ini_options]
