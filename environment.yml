@@ -19,3 +19,4 @@ dependencies:
 
   - pip:
     - pre-commit
+    - Flake8-pyproject
