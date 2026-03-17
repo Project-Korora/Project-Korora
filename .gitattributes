@@ -2,22 +2,22 @@
 * text=auto eol=lf
 
 # Python sources
-*.py    text diff=python
+*.py    text=auto eol=lf diff=python
 
 # Documents
-*.md    text diff=markdown
-*.txt   text
+*.md    text=auto eol=lf diff=markdown
+*.txt   text=auto eol=lf
 
 # Serialisation
-*.json  text
-*.toml  text
-*.yaml  text
-*.yml   text
+*.json  text=auto eol=lf
+*.toml  text=auto eol=lf
+*.yaml  text=auto eol=lf
+*.yml   text=auto eol=lf
 
 # Configuration files
-.editorconfig   text
-.gitignore      text
-LICENSE         text
+.editorconfig   text=auto eol=lf
+.gitignore      text=auto eol=lf
+LICENSE         text=auto eol=lf
 
 # Ignore top level
 .github             export-ignore
