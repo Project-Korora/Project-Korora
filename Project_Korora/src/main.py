@@ -2,8 +2,8 @@ import os
 import traceback
 from time import sleep
 
-import Project_Korora.src.lib.tasko as tasko
-from Project_Korora.src.lib.pycubed import cubesat
+import tasko
+from pycubed import cubesat
 
 print("Initializing PyCubed Hardware...")
 

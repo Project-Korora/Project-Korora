@@ -1,4 +1,4 @@
-from Project_Korora.src.lib.tasko.loop import Loop
+from .loop import Loop
 
 # Enable logging: set builtins.tasko_logging = True before importing the first time.
 #
