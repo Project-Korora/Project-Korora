@@ -1,4 +1,4 @@
-import tasko
+import Project_Korora.src.lib.tasko as tasko
 
 
 class ManagedResource:
