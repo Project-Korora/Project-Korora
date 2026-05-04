@@ -1,7 +1,7 @@
 from unittest import TestCase
 
-from tasko import Loop
-from tasko.managed_resource import ManagedResource
+from Project_Korora.src.lib.tasko import Loop
+from Project_Korora.src.lib.tasko.managed_resource import ManagedResource
 
 
 class Resource:

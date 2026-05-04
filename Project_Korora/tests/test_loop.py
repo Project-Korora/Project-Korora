@@ -1,8 +1,8 @@
 import time
 from unittest import TestCase
 
-from tasko import Loop
-from tasko.loop import _yield_once, set_time_provider
+from Project_Korora.src.lib.tasko import Loop
+from Project_Korora.src.lib.tasko.loop import _yield_once, set_time_provider
 
 
 class TestLoop(TestCase):

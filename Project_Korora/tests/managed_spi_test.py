@@ -1,7 +1,7 @@
 from unittest import TestCase
 
-from tasko import Loop
-from tasko.managed_spi import ManagedSpi
+from Project_Korora.src.lib.tasko import Loop
+from Project_Korora.src.lib.tasko.managed_spi import ManagedSpi
 
 
 # This is a terrible pattern, used only for tests
