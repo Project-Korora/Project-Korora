@@ -17,6 +17,7 @@ dependencies:
   # documentation
   - sphinx
 
+  # precommit for running checks, Flake8 plugin for .toml files, project dependencies
   - pip:
     - pre-commit
     - Flake8-pyproject
