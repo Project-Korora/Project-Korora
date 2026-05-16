@@ -7,6 +7,8 @@ repos:
     rev: v5.0.0
     hooks:
       - id: end-of-file-fixer
+      - id: mixed-line-ending
+        args: ['--fix=lf']
       - id: trailing-whitespace
       - id: check-yaml
       - id: check-toml
@@ -21,6 +23,8 @@ repos:
     rev: 7.0.0
     hooks:
       - id: flake8
+        additional_dependencies:
+          - Flake8-pyproject
 
   - repo: https://github.com/asottile/pyupgrade
     rev: v3.19.1

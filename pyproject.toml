@@ -26,14 +26,24 @@ line_length = 88
 [tool.flake8]
 # Linter settings
 extend-ignore = "E203"
+# Ignore:
+# - E741 Ambigious variable name for FrameType.I Frames.
+per-file-ignores = [
+    "Project_Korora/src/lib/ax25/__init__.py:E741"
+]
 exclude = [
     ".git",
     "__pycache__",
     ".pytest_cache/"
 ]
-max-complexity = 10
+# Max Complexity is set to 21 for the nessacarily complex rmf9x Radio Chip.
+max-complexity = 21
 max-line-length = 88
 
 [tool.pytest.ini_options]
 addopts = "-l"
 testpaths = ["Project_Korora/tests"]
+norecursedirs = ["Project_Korora/tests/micropython_only"]
+
+[tool.setup.packages.find]
+where = ["Project_Korora/src/lib/"]
