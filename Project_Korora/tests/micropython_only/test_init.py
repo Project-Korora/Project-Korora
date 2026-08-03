@@ -89,6 +89,7 @@ class MockSatellite:
         """
         Big init routine as the whole board is brought up.
         """
+
         self.BOOTTIME = const(time.monotonic())
         self.data_cache = {}
         self.filenumbers = {}
@@ -98,103 +99,116 @@ class MockSatellite:
         self.micro = microcontroller
         self.hardware = {
             "IMU": False,
-            "Radio1": False,
-            "Radio2": False,
             "SDcard": False,
-            "GPS": False,
-            "WDT": False,
             "USB": False,
             "PWR": False,
+            "Neopixel": False,
         }
-
-        # Define burn wires
-        self._relayA = digitalio.DigitalInOut(board.RELAY_A)
-        self._relayA.switch_to_output(drive_mode=digitalio.DriveMode.OPEN_DRAIN)
-        self._resetReg = digitalio.DigitalInOut(board.VBUS_RST)
-        self._resetReg.switch_to_output(drive_mode=digitalio.DriveMode.OPEN_DRAIN)
 
         # Define battery voltage
         self._vbatt = AnalogIn(board.BATTERY)
-
-        # Define MPPT charge current measurement
-        self._ichrg = AnalogIn(board.L1PROG)
-        self._chrg = digitalio.DigitalInOut(board.CHRG)
-        self._chrg.switch_to_input()
 
         # Define SPI,I2C,UART
         self.i2c1 = busio.I2C(board.SCL, board.SDA)
         self.spi = board.SPI()
         self.uart = busio.UART(board.TX, board.RX)
 
-        # Define GPS
-        # self.en_gps = digitalio.DigitalInOut(board.EN_GPS)
-        # self.en_gps.switch_to_output()
-
         # Define filesystem stuff
         self.test_log_file = "/testlog.txt"
 
-        # Define radio
-        #_rf_cs1 = digitalio.DigitalInOut(board.RF1_CS)
-        #_rf_rst1 = digitalio.DigitalInOut(board.RF1_RST)
-        #self.enable_rf = digitalio.DigitalInOut(board.EN_RF)
-        #self.radio1_DIO0 = digitalio.DigitalInOut(board.RF1_IO0)
-        # self.enable_rf.switch_to_output(value=False) # if U21
-        #self.enable_rf.switch_to_output(value=True)  # if U7
-        #_rf_cs1.switch_to_output(value=True)
-        #_rf_rst1.switch_to_output(value=True)
-        #self.radio1_DIO0.switch_to_input()
-
         # Initialize SD card (always init SD before anything else on spi bus)
         try:
-            # Baud rate depends on the card, 4MHz should be safe
-            _sd = sdcardio.SDCard(self.spi, board.SD_CS, baudrate=4000000)
-            _vfs = VfsFat(_sd)
-            mount(_vfs, "/sd")
-            self.fs = _vfs
-            sys.path.append("/sd")
+            self.init_sd_card()         
+            self.test_log_file = "/sd/testlog.txt" # Sets the logging file to use the SD card's storage
             self.hardware["SDcard"] = True
-            self.logfile = "/sd/log.txt"
+            self.log("SD card init successful")
         except Exception as e:
-            if self.debug:
-                print("[ERROR][SD Card]", e)
+            self.log(f"[ERROR] SD card init unsuccessful: {e}", force_serial=True)
 
         # Initialize Neopixel
         try:
-            self.neopixel = neopixel.NeoPixel(
-                board.NEOPIXEL, 1, brightness=0.2, pixel_order=neopixel.GRB
-            )
-            self.neopixel[0] = (0, 0, 0)
+            self.init_neopixel()
             self.hardware["Neopixel"] = True
+            self.log("Neopixel init successful")
         except Exception as e:
-            if self.debug:
-                print("[WARNING][Neopixel]", e)
+            self.log(f"[ERROR] Neopixel init unsuccessful: {e}", force_serial=True)
 
         # Initialize USB charger
         try:
-            self.usb = bq25883.BQ25883(self.i2c1)
-            self.usb.charging = False
-            self.usb.wdt = False
-            self.usb.led = False
-            self.usb.charging_current = 8  # 400mA
-            self.usb_charging = False
+            self.init_usb_charger()
             self.hardware["USB"] = True
+            self.log("USB charger init successful")
         except Exception as e:
-            if self.debug:
-                print("[ERROR][USB Charger]", e)
+            self.log(f"[ERROR] USB charger init unsuccessful: {e}", force_serial=True)
 
         # Initialize Power Monitor
         try:
-            self.pwr = adm1176.ADM1176(self.i2c1)
-            self.pwr.sense_resistor = 1
+            self.init_pwr_monitor()
             self.hardware["PWR"] = True
+            self.log("Power monitor init successful")
         except Exception as e:
-            if self.debug:
-                print("[ERROR][Power Monitor]", e)
+            self.log(f"[ERROR] Power monitor init unsuccessful: {e}", force_serial=True)
 
         # Initialize IMU
         try:
-            self.IMU = bmx160.BMX160_I2C(self.i2c1)
+            self.IMU = self.init_imu()
             self.hardware["IMU"] = True
+            self.log("IMU init successful")
         except Exception as e:
-            if self.debug:
-                print("[ERROR][IMU]", e)
+            self.log(f"IMU init unsuccessful: {e}", force_serial=True)
+
+    def init_sd_card(self) -> bool:
+        """
+        Attempts to initialise the SD card. If an error occurs, this method throws an exception.
+        It is important that the SD card is initialised before anything else on the board.
+        """
+
+        # Baud rate depends on the card, 4MHz should be safe
+        _sd = sdcardio.SDCard(self.spi, board.SD_CS, baudrate=4000000) # Initialises the SD card
+        _vfs = VfsFat(_sd) # Initialises FAT file system on SD card
+        mount(_vfs, "/sd") # Mounts the SD card's FAT system at the path "/sd"
+        self.fs = _vfs # Sets the satellite's file system 
+        sys.path.append("/sd")
+
+        return True
+
+
+    def init_neopixel(self):
+        self.neopixel = neopixel.NeoPixel(
+            board.NEOPIXEL, 1, brightness=0.2, pixel_order=neopixel.GRB
+        )
+        self.neopixel[0] = (0, 0, 0)
+
+
+    def init_usb_charger(self):
+        self.usb = bq25883.BQ25883(self.i2c1)
+        self.usb.charging = False
+        self.usb.wdt = False
+        self.usb.led = False
+        self.usb.charging_current = 8  # 400mA
+        self.usb_charging = False
+
+
+    def init_pwr_monitor(self):
+        self.pwr = adm1176.ADM1176(self.i2c1)
+        self.pwr.sense_resistor = 1
+
+
+    def init_imu(self):
+        self.IMU = bmx160.BMX160_I2C(self.i2c1)
+    
+
+    def log(self, msg: str, force_serial: bool = False) -> None:
+        """
+        Logs a message to the SD card's file system, if the SD card has been mounted.
+        If force_serial is true, prints to serial if the SD card's log is not available.
+        """
+
+        t = int(time.monotonic())
+        if self.hardware["SDcard"]:
+            with open(self.logfile, "a+") as f:
+                f.write(f"{t}, {msg}\n")
+        elif force_serial:
+            print(f"{t}, {msg}")
+
+
