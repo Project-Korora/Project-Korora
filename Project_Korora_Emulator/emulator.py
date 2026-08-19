@@ -50,7 +50,7 @@ def main() -> int:
             parser.error(f"The given {label} is not readable. Looked at {path}")
 
     if not satellite_main.is_file():
-        parser.error(f"main.py was not found. Tried to look at {path}")
+        parser.error(f"main.py was not found. Tried to look at {satellite_main}")
 
     return 0 # Exited successfully.
 
