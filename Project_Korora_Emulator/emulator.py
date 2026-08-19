@@ -51,3 +51,18 @@ def main() -> int:
 
     if not satellite_main.is_file():
         parser.error(f"main.py was not found. Tried to look at {path}")
+
+    return 0 # Exited successfully.
+
+    # Outline for emulation:
+    # 1. Load config data from directory
+    # 2. Build the scenario
+    # 3. Allocate resources required for scenario
+    # 4. Execute via main.py (use runpy)
+    # 5. Use emulator libraries instead of real ones
+    # 6. Log details about the process
+    # 7. Run existing tests
+    # 8. Export details to a report and exit
+
+if __name__ == "__main__":
+    sys.exit(main())
