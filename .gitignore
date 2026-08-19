@@ -13,3 +13,6 @@
 # Python cache files
 .pytest_cache/
 __pycache__/
+
+# IDE settings
+.idea/
